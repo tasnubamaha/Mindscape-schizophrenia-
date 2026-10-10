@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffd9c4">
+<title>Mindscape: Understanding Schizophrenia</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff7f1;--card:#fff;--tx:#33284a;--mu:#6f6585;--ink:#4b3a8f;--lav:#d9d3f2;--teal:#6a54c9;--coral:#e4685d;--ln:#efe3ec;--h1:#ffd9c4;--h2:#ecd0f7;--ht:#33284a;--tabh:68px;--hf:"Sora","DM Sans",system-ui,sans-serif;--bf:"DM Sans",system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1a2e;--card:#2a2440;--tx:#f1ecfb;--mu:#b3a9cc;--ln:#3a3256;--teal:#a897f0;--h1:#3d2f4f;--h2:#4a2f48;--ht:#f6efff}}
+:root[data-theme="dark"]{--bg:#1f1a2e;--card:#2a2440;--tx:#f1ecfb;--mu:#b3a9cc;--ln:#3a3256;--teal:#a897f0;--h1:#3d2f4f;--h2:#4a2f48;--ht:#f6efff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.5 var(--bf)}
+#app{max-width:480px;margin:0 auto;height:100%;position:relative;background:var(--bg);overflow:hidden;box-shadow:0 0 0 1px var(--ln)}
+.scr{position:absolute;inset:0;bottom:calc(var(--tabh) + env(safe-area-inset-bottom,0px));overflow-y:auto;display:none;padding-bottom:24px}
+.scr.on{display:block}
+h1,h2,h3{font-family:var(--hf);margin:0;letter-spacing:-.01em}
+.hero{background:linear-gradient(160deg,var(--h1),var(--h2));color:var(--ht);padding:28px 22px 34px;border-radius:0 0 32px 32px;position:relative;overflow:hidden}
+.hero svg{position:absolute;right:-40px;top:-20px;width:240px;opacity:.9}
+.hero h1{font-size:1.9rem;line-height:1.15;max-width:76%}
+.hero p{color:var(--ht);opacity:.85;margin:10px 0 0;max-width:80%;font-size:.95rem}
+.pad{padding:0 18px}
+.sec{font-family:var(--hf);font-size:1.05rem;margin:22px 18px 10px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px;margin-top:-22px;position:relative}
+.tile{background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:14px;text-align:left;font:inherit;color:var(--tx);cursor:pointer;box-shadow:0 8px 20px rgba(106,84,201,.15)}
+.tile b{display:block;font-family:var(--hf);font-size:1.5rem}
+.tile span{color:var(--mu);font-size:.85rem}
+.tile i{font-style:normal;font-size:1.4rem;display:block;margin-bottom:6px}
+.strip{display:flex;gap:10px;overflow-x:auto;padding:2px 18px 6px;scroll-snap-type:x mandatory}
+.chip{flex:none;scroll-snap-align:start;width:150px;min-height:96px;border-radius:18px;padding:12px;color:#fff;font:inherit;font-weight:700;text-align:left;border:0;cursor:pointer;font-size:.92rem}
+.note{margin:18px;padding:14px 16px;border-radius:16px;background:rgba(242,118,107,.13);border:1px solid var(--coral);font-size:.9rem}
+.note b{color:var(--coral)}
+.hd{padding:26px 18px 6px}.hd h2{font-size:1.5rem}.hd p{color:var(--mu);margin:4px 0 0;font-size:.92rem}
+.row{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--ln);border-radius:18px;margin:10px 18px;padding:14px;width:calc(100% - 36px);text-align:left;font:inherit;color:var(--tx);cursor:pointer}
+.ico{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:1.4rem}
+.row h3{font-size:.98rem}.row p{margin:2px 0 0;color:var(--mu);font-size:.85rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:6px 18px}
+.gt{background:var(--card);border:1px solid var(--ln);border-radius:20px;padding:14px;text-align:left;font:inherit;color:var(--tx);cursor:pointer;min-height:130px;position:relative}
+.gt .ico{margin-bottom:10px}.gt h3{font-size:.92rem}
+.star{position:absolute;top:10px;right:12px;color:var(--teal);font-size:1.1rem}
+.act{display:flex;gap:12px;align-items:center;margin:10px 18px;padding:16px;border-radius:20px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#6a54c9,#c9568f)}
+.act b{font-family:var(--hf);display:block}.act span{font-size:.85rem;opacity:.9}
+.q{width:calc(100% - 36px);margin:10px 18px;padding:12px 16px;border-radius:14px;border:1px solid var(--ln);background:var(--card);color:var(--tx);font:inherit}
+.ref{margin:8px 18px;padding:12px 14px;background:var(--card);border:1px solid var(--ln);border-left:4px solid var(--lav);border-radius:12px;font-size:.84rem;color:var(--mu)}
+.ref a{color:var(--teal);word-break:break-word}
+nav{position:absolute;left:0;right:0;bottom:0;height:calc(var(--tabh) + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);background:var(--card);border-top:1px solid var(--ln);display:flex;z-index:10}
+nav button{flex:1;border:0;background:none;color:var(--mu);font:inherit;font-size:.72rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer}
+nav button svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button.on{color:var(--teal);font-weight:700}
+#sh{position:absolute;inset:0;z-index:20;background:rgba(20,34,32,.45);display:none;align-items:flex-end}
+#sh.on{display:flex}
+#sheet{background:var(--card);width:100%;max-height:82%;overflow-y:auto;border-radius:28px 28px 0 0;padding:10px 22px calc(26px + env(safe-area-inset-bottom,0px));animation:up .25s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){#sheet{animation:none}}
+.grab{width:42px;height:5px;border-radius:9px;background:var(--ln);margin:0 auto 16px}
+#sheet h2{font-size:1.3rem;margin:10px 0}
+#sheet p{margin:0 0 14px;line-height:1.6}
+.badge{display:inline-block;background:rgba(242,118,107,.15);color:var(--coral);border-radius:999px;padding:3px 12px;font-size:.78rem;font-weight:700}
+.btns{display:flex;gap:10px;margin-top:8px}
+.btns button{flex:1;padding:13px;border-radius:14px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font:inherit;font-weight:700;cursor:pointer}
+.btns .p{background:var(--teal);border-color:var(--teal);color:#fff}
+.seg{display:flex;margin:6px 18px;background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:4px}.seg button{flex:1;border:0;background:none;color:var(--mu);padding:10px;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}.seg button.on{background:var(--ink);color:#fff}
+.hope{margin:18px;padding:16px;border-radius:20px;background:linear-gradient(135deg,#6a54c9,#b9569a);color:#fff}.hope h3{font-size:1rem}.hope p{margin:6px 0 0;font-size:.9rem}
+.card2{margin:12px 18px;padding:16px;border-radius:20px;background:var(--card);border:1px solid var(--ln)}.card2 small{color:var(--mu)}
+.mood{display:flex;gap:8px;margin:8px 0}.mood button{flex:1;font:inherit;font-size:1.4rem;color:var(--tx);padding:8px 2px;border-radius:12px;border:1px solid var(--ln);background:var(--bg);cursor:pointer}.mood button.z{font-size:.8rem}.mood button.on{border-color:var(--teal);background:rgba(47,179,168,.22)}
+.bars{display:flex;gap:6px;align-items:flex-end;height:50px;margin-top:10px}.bars i{flex:1;background:var(--teal);border-radius:6px 6px 0 0}
+.my{margin:12px 18px;padding:22px 18px;border-radius:22px;min-height:150px;width:calc(100% - 36px);text-align:left;font:inherit;border:0;cursor:pointer;color:#fff;background:var(--coral);display:block}.my.f{background:var(--teal)}.my small{display:block;font-weight:700;margin-bottom:8px;opacity:.92}.my b{font-family:var(--hf);font-size:1.1rem;line-height:1.35;font-weight:600}
+.br{width:140px;height:140px;border-radius:50%;margin:18px auto;background:radial-gradient(#ffe3d6,#9b86e8);animation:br 14s ease-in-out infinite}@keyframes br{0%{transform:scale(.7)}29%,57%{transform:scale(1)}100%{transform:scale(.7)}}@media (prefers-reduced-motion:reduce){.br{animation:none}}
+.inp{width:100%;padding:11px 14px;margin:4px 0 10px;border-radius:12px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font:inherit}.li{display:flex;gap:10px;margin:10px 0;align-items:flex-start}.li input{margin-top:4px;width:18px;height:18px;accent-color:var(--teal)}.ul{padding-left:20px;margin:6px 0 14px}.ul li{margin:6px 0}
+#home{background:linear-gradient(175deg,#ffe6d6 0%,#ffdbe8 38%,#e3dcff 72%,#d3effa 100%)}#signs{background:linear-gradient(175deg,#e5dcff,#ffdfe9 55%,#ffeede)}#care{background:linear-gradient(175deg,#d6f1ea,#e8e0ff 55%,#ffe4d6)}#myths{background:linear-gradient(175deg,#ffe0d2,#ffd8ea 50%,#e0dcff)}#help{background:linear-gradient(175deg,#d4ecfb,#e4e0ff 55%,#ffe3ee)}#src{background:linear-gradient(175deg,#fff0e4,#ece3ff)}#today{background:linear-gradient(175deg,#ffe9d6,#e7defc 60%,#d6f1ea)}
+:root[data-theme="light"] .card2,:root[data-theme="light"] .row,:root[data-theme="light"] .gt,:root[data-theme="light"] .tile,:root[data-theme="light"] .ref{background:rgba(255,255,255,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-color:rgba(255,255,255,.9)}
+.brand{display:flex;gap:10px;align-items:center;margin-bottom:18px;position:relative;z-index:1}.brand b{font-family:var(--hf);font-size:1.15rem;display:block;line-height:1.1}.brand span{font-size:.78rem;opacity:.75}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .scr{background:var(--bg)!important}}:root[data-theme="dark"] .scr{background:var(--bg)!important}
+
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+</style></head><body>
+<div id="app">
+
+<div class="scr on" id="home">
+ <div class="hero">
+  <button id="thm" aria-label="Switch between light and dark mode" style="position:absolute;top:14px;right:14px;z-index:2;border:0;border-radius:999px;padding:8px 14px;background:rgba(255,255,255,.7);color:#1f3a38;font:inherit;font-size:.85rem;font-weight:700;cursor:pointer"></button>
+  <div class="brand"><svg viewBox="0 0 48 48" width="44" height="44" role="img" aria-label="Mindscape logo"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb88c"/><stop offset=".55" stop-color="#e87c9a"/><stop offset="1" stop-color="#6a54c9"/></linearGradient></defs><rect width="48" height="48" rx="14" fill="url(#lg)"/><circle cx="24" cy="20" r="8" fill="#fff"/><path d="M8 32c5-5 9-5 16 0s11 5 16 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M12 40c4-3 8-3 12 0s8 3 12 0" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/></svg><div><b>Mindscape</b><span>Understanding schizophrenia</span></div></div>
+  <svg viewBox="0 0 240 240" aria-hidden="true"><circle cx="150" cy="100" r="80" fill="#ffc9a8" opacity=".7"/><circle cx="120" cy="130" r="55" fill="#f7a8c4" opacity=".7"/><circle cx="185" cy="150" r="38" fill="#b9a8f2" opacity=".8"/><circle cx="95" cy="70" r="14" fill="#ffe08a" opacity=".95"/></svg>
+  <h1 id="gr">Hello</h1>
+  <p>A gentle guide to understanding schizophrenia: the signs, real treatments, and where to find support.</p>
+ </div>
+ <div class="tiles">
+  
+  
+ </div>
+ <div class="tiles" style="margin-top:14px"><button class="tile" data-x="calm"><i>🌬️</i><span>Calm space: breathe and ground</span></button><button class="tile" data-x="safe"><i>🛡️</i><span>My safety card: who to call</span></button></div>
+<button class="row" data-x="triage"><div class="ico" style="background:#e4685d26">🚨</div><div><h3>Do I need help now?</h3><p>A quick check: can it wait, or should I call someone?</p></div></button>
+<div class="card2"><small>Today's gentle tip</small><p id="tip" style="margin:6px 0 0"></p></div>
+<div class="hope" id="hp"><h3>Recovery is possible</h3><p>A 15- and 25-year international follow-up study (Harrison et al., 2001) found that many people improve over time. Treatment and steady support make a difference.</p></div>
+<div class="card2" id="mc"><h3>How are you today?</h3><div class="mood" id="md"></div><small>Hours slept</small><div class="mood" id="sl2"></div><div class="bars" id="bars"></div><small>Last 7 days, kept on this device only. Show it to your doctor.</small></div>
+
+ <div class="strip" id="strip" style="display:none"></div>
+ <div class="note"><b>Important.</b> This app is for learning, not diagnosis or treatment. The approaches here are add-ons that never replace prescribed medication or professional care. Check with a doctor before changing supplements, herbs or diet.</div>
+ 
+</div>
+
+<div class="scr" id="signs"><div class="hd"><h2>Signs &amp; symptoms</h2><p>Schizophrenia changes how reality is perceived and affects behavior. Tap a card to read more.</p></div><div id="sl"></div><h2 class="sec">Good to know</h2><div id="gk"></div></div>
+
+<div class="scr" id="care"><div class="hd"><h2>Care options</h2><p>Core treatments come first. Add-ons are extras, never a replacement. Star ideas to ask your doctor.</p></div><div class="seg"><button class="on" id="s1">Core treatments</button><button id="s2">Add-ons</button></div><div class="grid" id="ccr"></div><div class="grid" id="cg" style="display:none"></div></div>
+
+<div class="scr" id="help"><div class="hd"><h2>Get support</h2><p>Better relationships with a therapist are linked to better outcomes.</p></div>
+ <a class="act" href="https://www.choosingtherapy.com/best-online-therapy/" target="_blank" rel="noopener"><span style="font-size:1.6rem">💻</span><div><b>Best online therapy services</b><span>choosingtherapy.com</span></div></a>
+ <a class="act" style="background:linear-gradient(135deg,#c8553d,#a8477f)" href="https://growtherapy.com/wp/cost-estimate/?utm_source=choosing_therapy&utm_medium=affliate&utm_content=general" target="_blank" rel="noopener"><span style="font-size:1.6rem">💳</span><div><b>Estimate therapy costs</b><span>Grow Therapy</span></div></a>
+ <a class="act" style="background:linear-gradient(135deg,#2fb3a8,#3b8f9a)" href="https://www.apa.org/topics/psychotherapy/choose-therapist" target="_blank" rel="noopener"><span style="font-size:1.6rem">🧭</span><div><b>How to choose a psychologist</b><span>American Psychological Association</span></div></a>
+ <button class="row" data-x="triage"><div class="ico" style="background:#e4685d26">🚨</div><div><h3>Do I need help now?</h3><p>A quick check: can it wait, or should I call someone?</p></div></button>
+<button class="row" data-x="help"><div class="ico" style="background:#6b5fd626">🤝</div><div><h3>Supporting someone you love</h3><p>Do's and don'ts for families and friends</p></div></button>
+<button class="row" data-x="prep"><div class="ico" style="background:#2fb3a826">📝</div><div><h3>Questions for my doctor</h3><p>A checklist that includes the ideas you starred</p></div></button>
+<button class="row" data-x="safe"><div class="ico" style="background:#e0645a26">🛡️</div><div><h3>My safety card</h3><p>Save who to call, one tap away</p></div></button>
+<button class="row" data-go="src"><div class="ico" style="background:#d9822b26">📚</div><div><h3>References</h3><p>Search the sources behind this app</p></div></button>
+<h2 class="sec">Help in Bangladesh</h2>
+<a class="row" href="https://www.google.com/search?q=999+national+emergency+service+Bangladesh" target="_blank" rel="noopener" style="text-decoration:none"><div class="ico" style="background:#e4685d26">🚑</div><div><h3>Emergency: 999</h3><p>National emergency service, any time. Tap to verify on Google.</p></div></a>
+<a class="row" href="https://www.google.com/search?q=16263+Shastho+Batayon+health+helpline+Bangladesh" target="_blank" rel="noopener" style="text-decoration:none"><div class="ico" style="background:#6a54c926">🩺</div><div><h3>Health helpline: 16263</h3><p>Open 24 hours. Talk to a doctor, including mental health counselling. Normal call charges apply. Tap to verify on Google.</p></div></a>
+<a class="row" href="https://www.google.com/search?q=Kaan+Pete+Roi+helpline+09612119911" target="_blank" rel="noopener" style="text-decoration:none"><div class="ico" style="background:#e87c9a26">💜</div><div><h3>Kaan Pete Roi: 09612-119911</h3><p>Listening and emotional support from trained volunteers, every day 3 PM to 3 AM. Tap to verify on Google.</p></div></a>
+<div class="row" style="cursor:default"><div class="ico" style="background:#23867d26">🏥</div><div><h3>National Institute of Mental Health, Dhaka</h3><p>Government mental health hospital in Sher-e-Bangla Nagar. Ask about current clinics and services.</p></div></div>
+<p class="note" style="background:none;border:0;padding:0 18px;margin:8px 0">Numbers checked from official sources in October 2026. Tap a number to check it on Google, then dial it from your phone. Services can change, so confirm before relying on them.</p>
+<div class="note"><b>In a crisis?</b> If someone is in danger or may harm themselves or others, contact emergency services right away. In Bangladesh, call 999.</div>
+</div>
+
+<div class="scr" id="today"><div class="hd"><h2>Today</h2><p>A quick check-in, just for you.</p></div></div>
+<div class="scr" id="myths"><div class="hd"><h2>Myths vs facts</h2><p>Tap a card to flip it. Sharing facts reduces stigma.</p></div><div id="ml2"></div></div>
+<div class="scr" id="src"><div class="hd"><h2>References</h2><p>Sources behind this content.</p></div><input class="q" id="q" type="search" placeholder="Search references"><div id="rl"></div></div>
+
+<nav id="nav"></nav>
+<div id="sh"><div id="sheet" role="dialog" aria-modal="true"></div></div>
+</div>
+<script>
+var S=[["Persistent delusions","The person has fixed beliefs that something is true, despite evidence to the contrary.","💭","#6b5fd6"],
+["Persistent hallucinations","The person may hear, smell, see, touch, or feel things that are not there.","👂","#2fb3a8"],
+["Influence, control or passivity","The experience that one's feelings, impulses, actions, or thoughts are not generated by oneself, are being placed in or withdrawn from one's mind by others, or that one's thoughts are being broadcast to others.","📡","#3b8f9a"],
+["Disorganized thinking","Often observed as jumbled or irrelevant speech.","🧩","#d9822b"],
+["Highly disorganized behavior","The person does things that appear bizarre or purposeless, or has unpredictable or inappropriate emotional responses that interfere with their ability to organize their behavior.","🌀","#e0645a"],
+["Negative symptoms","Very limited speech, restricted experience and expression of emotions, inability to experience interest or pleasure, and social withdrawal.","🌫️","#5d6280"],
+["Agitation or slowed movement","Extreme agitation or slowing of movements, and maintenance of unusual postures.","🧍","#8a5fb5"]];
+var T=[["Vitamin supplements","Several vitamins (B, C, D and E) have been shown to be deficient in people with schizophrenia. Vitamins B9 (folate) and B12 may improve negative symptoms for certain genotypes. Vitamin C is a water-soluble antioxidant; one study found improvements in psychiatric symptoms, and it may modulate the brain's dopamine pathways. Vitamin D may help those genetically predisposed; one study indicated male participants who regularly took it had a decreased risk of developing the disorder. Vitamin E is a fat-soluble antioxidant theorized to help ameliorate antipsychotic side effects.","💊","#f2b84b","Mixed evidence|B9 and B12: Roffman et al., 2013 (JAMA Psychiatry), 140 patients. Benefit for negative symptoms appeared mainly in people with certain gene variants. Vitamin C: Dakhale et al., 2005 (Psychopharmacology), 40 patients, 8 weeks. Vitamin D: McGrath et al., 2004 (Schizophrenia Research), a Finnish birth cohort. It found a link, not proof, in males who received vitamin D in their first year of life. Vitamin E: Cochrane review, Soares-Weiser et al., 2018. Evidence for antipsychotic side effects is weak and limited."],
+["Ketogenic diet","A diet low in carbohydrates and sugar and rich in fat and protein can reduce psychotic symptoms and even counteract certain side effects of antipsychotic medication. Plenty of antioxidant-rich fruits and vegetables can be incorporated into one's diet.","🥑","#6aa84f","Very early evidence|Based on case reports and small uncontrolled pilots, such as Kraft and Westman, 2009 (Nutrition and Metabolism). There are no large controlled trials yet, so this is not a proven treatment. Ask a doctor first, especially if you take medication."],
+["Melatonin","A natural hormone in the human brain that helps regulate the sleep-wake cycle. When taken routinely, at a time specified by a clinician, melatonin supplements can help stabilize the sleep-wake cycle and prevent insomnia.","🌙","#6b5fd6","Small trial|Shamir et al., 2000 (Journal of Clinical Psychiatry): 19 patients, randomized crossover trial. Melatonin improved sleep efficiency in people whose sleep was poor."],
+["Omega-3 fatty acids","Important for brain development and functioning, and often deficient in individuals with schizophrenia.","🐟","#3b8f9a","Prevention study|Amminger et al., 2010 (Archives of General Psychiatry): 81 young people at very high risk of psychosis took omega-3 or placebo for 12 weeks. Fewer in the omega-3 group developed psychosis within a year. This does not prove benefit once schizophrenia is established."],
+["Amino acids","Amino acid deficiencies can accompany schizophrenia. One study suggests using benzoate as an add-on to antipsychotic medication can be beneficial for reducing symptoms and improving cognitive symptoms.","🧪","#e0645a","Small trial|Lane et al., 2013 (JAMA Psychiatry): 52 adults with chronic schizophrenia took sodium benzoate or placebo for 6 weeks on top of antipsychotics. Symptoms and thinking improved. The authors call the results preliminary."],
+["Stress management & yoga","In a family or group setting, reducing stress for those who support an individual with schizophrenia is essential. One study found inpatients showed significant symptom improvement during an 8-week yoga therapy program of breathing exercises, postures and guided meditation. It may work by regulating the autonomic nervous system (stress hormones, blood pressure, arousal level).","🧘","#2fb3a8","Several trials|Duraiswamy et al., 2007 (Acta Psychiatrica Scandinavica): 61 patients, 4 months, yoga did better than exercise. Manjunath et al., 2013 (Indian Journal of Psychiatry): 88 inpatients, 2 weeks, yoga added to usual care. Program lengths differ between studies."],
+["Herbal supplements","Yokukansan, a traditional Chinese herbal medicine used for psychiatric disorders since 1555, is an extract of 7 herbs. It has been shown to improve antipsychotic side effects and reduce positive symptoms. It is believed to be neuroprotective and to work by modulating glutamate, which is often deregulated in schizophrenia.","🌿","#4c9a6a","Mixed evidence|Miyaoka et al., 2008 to 2013: small open-label studies in Japan. A 2015 placebo-controlled trial of 120 inpatients over 4 weeks found a trend toward benefit that was not statistically significant."],
+["Social skills training","Social skills training (SST) can be particularly beneficial for people with schizophrenia, especially in conjunction with psychotherapy and medication.","🤝","#d9822b","Most studied|Kurtz and Mueser, 2008 (Journal of Consulting and Clinical Psychology): meta-analysis of 22 controlled trials. Moderate effect on community functioning, small effect on relapse. An earlier 2002 meta-analysis found no clear benefit. Works best alongside medication and therapy."]];
+var R=["American Psychiatric Association. (2013). Diagnostic and Statistical Manual of Mental Disorders (5th ed.). Arlington, Va: American Psychiatric Association.",
+"American Psychiatric Association. (2018, August). What is mental illness? https://www.psychiatry.org/patients-families/what-is-mental-illness",
+"Feinstein, R., Heiman, N., & Yager, J. (2015). Common factors affecting psychotherapy outcomes: some implications for teaching psychotherapy. Journal of Psychiatric Practice, 21(3), 180-189. https://doi.org/10.1097/PRA.0000000000000064",
+"DeAngelis, T. (2019, November). Better relationships with patients lead to better outcomes. Monitor on Psychology, 50(10): 38. https://www.apa.org/monitor/2019/11/ce-corner-relationships",
+"American Psychological Association. (2019, October). How to choose a psychologist. https://www.apa.org/topics/psychotherapy/choose-therapist",
+"Harrison G, Hopper K, Craig T, Laska E, Siegel C, Wanderling J. Recovery from psychotic illness: a 15- and 25-year international follow-up study. Br J Psychiatry 2001; 178:506-17.",
+"Institute of Health Metrics and Evaluation (IHME). Global Health Data Exchange (GHDx). http://ghdx.healthdata.org/gbd-results-tool?params=gbd-api-2019-permalink/27a7644e8ad28e739382d31e77589dd7 (Accessed 25 September 2021)",
+"Laursen TM, Nordentoft M, Mortensen PB. Excess early mortality in schizophrenia. Annual Review of Clinical Psychology, 2014; 10, 425-438.",
+"WHO. Mental health systems in selected low- and middle-income countries: a WHO-AIMS cross-national analysis. WHO: Geneva, 2009",
+"Jaeschke K et al. Global estimates of service coverage for severe mental disorders: findings from the WHO Mental Health Atlas 2017. Glob Ment Health 2021; 8:e27.",
+"Roffman JL et al. (2013). JAMA Psychiatry (folate and vitamin B12 for negative symptoms of schizophrenia). https://doi.org/10.1001/jamapsychiatry.2013.900",
+"Dakhale GN, Khanzode SD, Khanzode SS, Saoji A. (2005). Supplementation of vitamin C with atypical antipsychotics reduces oxidative stress and improves the outcome of schizophrenia. Psychopharmacology, 182(4), 494-498. https://doi.org/10.1007/s00213-005-0117-1",
+"McGrath J, Saari K, Hakko H, et al. (2004). Vitamin D supplementation during the first year of life and risk of schizophrenia: a Finnish birth cohort study. Schizophrenia Research, 67(2-3), 237-245.",
+"Soares-Weiser K, Maayan N, Bergman H. (2018). Vitamin E for antipsychotic-induced tardive dyskinesia. Cochrane Database of Systematic Reviews, CD000209.",
+"Kraft BD, Westman EC. (2009). Schizophrenia, gluten, and low-carbohydrate, ketogenic diets: a case report and review of the literature. Nutrition & Metabolism, 6:10. https://doi.org/10.1186/1743-7075-6-10",
+"Shamir E, Laudon M, Barak Y, et al. (2000). Melatonin improves sleep quality of patients with chronic schizophrenia. Journal of Clinical Psychiatry, 61(5), 373-377.",
+"Amminger GP, et al. (2010). Long-chain omega-3 fatty acids for indicated prevention of psychotic disorders: a randomized, placebo-controlled trial. Archives of General Psychiatry, 67(2), 146-154.",
+"Lane HY, Lin CH, Green MF, et al. (2013). Add-on treatment of benzoate for schizophrenia: a randomized, double-blind, placebo-controlled trial of D-amino acid oxidase inhibitor. JAMA Psychiatry, 70(12), 1267-1275. https://doi.org/10.1001/jamapsychiatry.2013.2159",
+"Duraiswamy G, Thirthalli J, Nagendra HR, Gangadhar BN. (2007). Yoga therapy as an add-on treatment in the management of patients with schizophrenia: a randomized controlled trial. Acta Psychiatrica Scandinavica, 116(3), 226-232. https://doi.org/10.1111/j.1600-0447.2007.01032.x",
+"Manjunath RB, Varambally S, Thirthalli J, Basavaraddi IV, Gangadhar BN. (2013). Efficacy of yoga as an add-on treatment for in-patients with functional psychotic disorder. Indian Journal of Psychiatry, 55(Suppl 3), S374-S378.",
+"Miyaoka T, Furuya M, Yasuda H, et al. Yi-gan san as adjunctive therapy for treatment-resistant schizophrenia: an open-label study (yokukansan).",
+"Efficacy and safety of yokukansan in treatment-resistant schizophrenia: a randomized, multicenter, double-blind, placebo-controlled trial. (2015). https://doi.org/10.1155/2015/201592",
+"Kurtz MM, Mueser KT. (2008). A meta-analysis of controlled research on social skill training for schizophrenia. Journal of Consulting and Clinical Psychology, 76(3), 491-504."];
+var $=function(i){return document.getElementById(i)},saved={};
+try{saved=JSON.parse(localStorage.getItem('mk')||'{}')}catch(e){}
+function store(){try{localStorage.setItem('mk',JSON.stringify(saved))}catch(e){}}
+function ico(c,e){return '<div class="ico" style="background:'+c+'26">'+e+'</div>'}
+$('strip').innerHTML=S.map(function(s,i){return '<button class="chip" style="background:'+s[3]+'" data-s="'+i+'">'+s[2]+'<br>'+s[0]+'</button>'}).join('');
+$('sl').innerHTML=S.map(function(s,i){return '<button class="row" data-s="'+i+'">'+ico(s[3],s[2])+'<div><h3>'+s[0]+'</h3><p>'+s[1]+'</p></div></button>'}).join('');
+function care(){$('cg').innerHTML=T.map(function(t,i){return '<button class="gt" data-t="'+i+'">'+(saved[i]?'<span class="star">★</span>':'')+ico(t[3],t[2])+'<h3>'+t[0]+'</h3></button>'}).join('')}care();
+function refs(f){$('rl').innerHTML=R.filter(function(r){return r.toLowerCase().indexOf(f)>-1}).map(function(r){return '<div class="ref">'+r.replace(/(https?:\/\/[^\s]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>')+'</div>'}).join('')||'<div class="ref">No references match your search.</div>'}refs('');
+$('q').oninput=function(e){refs(e.target.value.toLowerCase())};
+function sheet(h){$('sheet').innerHTML='<div class="grab"></div>'+h;$('sh').classList.add('on')}
+function closeSheet(){$('sh').classList.remove('on')}
+$('sh').onclick=function(e){if(e.target===$('sh'))closeSheet()};
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSheet()});
+function openS(i){var s=S[i];sheet(ico(s[3],s[2])+'<h2>'+s[0]+'</h2><p>'+s[1]+'</p><div class="btns"><button class="p" onclick="closeSheet()">Done</button></div>')}
+function ev(s){var a=(s||'').split('|');return s?'<div class="card2" style="margin:0 0 14px;border-left:4px solid var(--teal)"><h3 style="font-size:.95rem">Evidence: '+a[0]+'</h3><p style="margin:6px 0 0;font-size:.88rem;color:var(--mu)">'+a[1]+'</p></div>':''}
+function openT(i){var t=T[i];sheet(ico(t[3],t[2])+'<h2>'+t[0]+'</h2><span class="badge">Add-on, never a replacement for treatment</span><p style="margin-top:12px">'+t[1]+'</p>'+ev(t[4])+'<div class="btns"><button id="sv">'+(saved[i]?'★ Saved to ask my doctor':'☆ Save to ask my doctor')+'</button><button class="p" onclick="closeSheet()">Done</button></div>');
+$('sv').onclick=function(){if(saved[i])delete saved[i];else saved[i]=1;store();care();openT(i)}}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-s],[data-t],[data-go]');if(!b)return;
+if(b.dataset.s!==undefined)openS(+b.dataset.s);else if(b.dataset.t!==undefined)openT(+b.dataset.t);else go(b.dataset.go)});
+var C=[["Antipsychotic medication","Usually the foundation of treatment. These medicines help reduce hallucinations, delusions and disorganized thinking. Side effects are possible, so a psychiatrist chooses and adjusts the medicine for each person. Do not stop or change medication suddenly without medical advice, because it raises the risk of relapse.","🩺","#3b3592"],
+["Psychotherapy (CBT)","Talk therapy, such as cognitive behavioral therapy for psychosis, helps people make sense of distressing beliefs and voices, cope with symptoms and stay with treatment. A good relationship with the therapist is linked to better outcomes.","🗣️","#2fb3a8"],
+["Family support & education","When families understand the illness and learn calm communication and coping skills, stress at home drops and the person is better supported. Looking after supporters' own stress matters too.","🏡","#d9822b"],
+["Coordinated specialty care","A team approach that combines medication, therapy, family support and help with school or work. It helps most when started early, soon after a first episode.","🧭","#e0645a"]];
+var M=[["Schizophrenia means a split personality.","No. It is not multiple personalities. It changes how a person perceives reality, thinks and behaves."],["People with schizophrenia are dangerous.","Most are not violent. They are more likely to be harmed by others than to harm anyone."],["Bad parenting or weak character causes it.","No. Research points to a mix of genes, brain development and environmental stress."],["It cannot be treated.","It is treatable. Long-term follow-up (Harrison et al., 2001) shows many people improve over time."],["Vitamins or diet can replace medication.","No. Supplements and diet are studied only as add-ons alongside medication and therapy."],["People with it cannot work or have relationships.","With treatment and support, many people study, work and build relationships."]];
+var G=[["Causes and risk factors","🧬","There is no single cause. Research points to a mix of genetics, differences in brain chemistry and development (dopamine and glutamate are involved) and environmental stress. It most often begins between the late teens and early thirties.","#6b5fd6"],["Getting a diagnosis","🩺","Start with a family doctor or psychiatrist. They review symptoms and history and rule out other causes, using criteria such as the DSM-5. Bring a trusted person and write down what you have noticed.","#2fb3a8"]];
+var ML={};try{ML=JSON.parse(localStorage.getItem('ml')||'{}')}catch(e){}
+function dk(n){var d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10)}
+function mood(){var t=ML[dk(0)]||{},E=['😞','😕','😐','🙂','😊'],Z=['Under 5h','5-7h','7-9h','9h+'];
+$('md').innerHTML=E.map(function(e,i){return '<button data-m="'+i+'" aria-label="Mood '+(i+1)+' of 5" class="'+(t.m===i?'on':'')+'">'+e+'</button>'}).join('');
+$('sl2').innerHTML=Z.map(function(z,i){return '<button data-z="'+i+'" class="z '+(t.z===i?'on':'')+'">'+z+'</button>'}).join('');
+var h='';for(var n=6;n>=0;n--){var v=(ML[dk(n)]||{}).m;h+='<i title="'+dk(n)+'" style="height:'+(v===undefined?4:(v+1)*9)+'px;opacity:'+(v===undefined?.25:.9)+'"></i>'}$('bars').innerHTML=h}
+function myths(){$('ml2').innerHTML=M.map(function(m,i){return '<button class="my" data-i="'+i+'"><small>Myth: tap to see the fact</small><b>'+m[0]+'</b></button>'}).join('')}
+function flip(b){var m=M[+b.dataset.i],f=b.classList.toggle('f');b.innerHTML=f?'<small>Fact: tap to flip back</small><b>'+m[1]+'</b>':'<small>Myth: tap to see the fact</small><b>'+m[0]+'</b>'}
+$('ccr').innerHTML=C.map(function(t,i){return '<button class="gt" data-c="'+i+'">'+ico(t[3],t[2])+'<h3>'+t[0]+'</h3></button>'}).join('');
+$('gk').innerHTML=G.map(function(g,i){return '<button class="row" data-k="'+i+'">'+ico(g[3],g[1])+'<div><h3>'+g[0]+'</h3><p>'+g[2]+'</p></div></button>'}).join('');
+function seg(n){$('ccr').style.display=n==1?'':'none';$('cg').style.display=n==1?'none':'';$('s1').classList.toggle('on',n==1);$('s2').classList.toggle('on',n==2)}
+$('s1').onclick=function(){seg(1)};$('s2').onclick=function(){seg(2)};
+var OK='<div class="btns"><button class="p" onclick="closeSheet()">Done</button></div>';
+function calm(){sheet('<h2>Calm space</h2><p style="text-align:center">Follow the circle: breathe in for 4, hold for 4, out for 6.</p><div class="br" aria-hidden="true"></div><h3>Look around: 5-4-3-2-1</h3><p>Name 5 things you see, 4 you can touch, 3 you hear, 2 you smell and 1 you taste. If you feel unsafe or overwhelmed, call someone from your safety card.</p>'+OK)}
+function helpG(){sheet('<h2>Supporting someone you love</h2><h3>Do</h3><ul class="ul"><li>Stay calm and listen without judging.</li><li>Encourage treatment and offer to go to appointments.</li><li>Learn the signs so you notice changes early.</li><li>Keep routines and sleep steady.</li><li>Look after your own stress and ask for support.</li></ul><h3>Avoid</h3><ul class="ul"><li>Arguing about voices or beliefs. Say you understand it feels real to them.</li><li>Blaming them or the family.</li><li>Stopping medicine or adding supplements without the doctor.</li></ul>'+OK)}
+function triage(){var L=[[2,'I or someone else is in immediate danger, or thinking about harming themselves or others'],[2,'Cannot stay safe, or is very confused or hard to wake'],[2,'High fever with very stiff muscles and confusion (can be a medicine emergency)'],[1,'Voices or beliefs are getting louder, scarier or giving orders'],[1,'Stopped medicine and old symptoms are coming back'],[1,'Barely sleeping for 2 or more nights'],[1,'Not eating or drinking, or not looking after self'],[1,'New or worrying medicine side effects'],[0,'Feeling more stressed or low than usual'],[0,'Sleep is a little off for a night or two'],[0,'Small changes that friends or family noticed']];
+sheet('<h2>Do I need help now?</h2><span class="badge">Draft for clinician review</span><p style="margin-top:10px">Tick everything that applies. This is a general guide, not a diagnosis. If you are unsure, choose the higher level of help.</p>'+L.map(function(x,i){return '<label class="li"><input type="checkbox" data-t2="'+i+'"><span>'+x[1]+'</span></label>'}).join('')+'<div id="tr2"></div>'+OK);
+$('sheet').onchange=function(){if(!$('tr2'))return;var m=-1,d={};document.querySelectorAll('[data-t2]').forEach(function(c){if(c.checked)m=Math.max(m,L[+c.dataset.t2][0])});try{d=JSON.parse(localStorage.getItem('sf')||'{}')}catch(e){}
+function tel(n,t){return n?'<a class="act" href="tel:'+String(n).replace(/[^\d+]/g,'')+'"><span style="font-size:1.4rem">📞</span><div><b>'+t+'</b></div></a>':''}
+var h='';
+if(m===2)h='<div class="card2" style="margin:12px 0;border-color:var(--coral)"><h3>Call emergency services now</h3><p style="margin:6px 0">Stay with the person and keep the area safe. Do not wait.</p>'+(tel(d.ep||'999','Call emergency: '+(d.ep||'999')))+'</div>';
+else if(m===1)h='<div class="card2" style="margin:12px 0;border-color:#d9a441"><h3>Contact your doctor or clinic today</h3><p style="margin:6px 0">Tell them what you ticked. Let a trusted person know too, and avoid staying alone while symptoms are getting worse.</p>'+tel(d.dp,'Call doctor or clinic')+tel('16263','Health helpline 16263 (24 hours)')+tel(d.mp,'Call trusted person')+'</div>';
+else if(m===0)h='<div class="card2" style="margin:12px 0;border-color:var(--teal)"><h3>It may be okay to wait, with care</h3><p style="margin:6px 0">Tell someone you trust, keep your routine and try the Calm space. Book a check-up, and check again if anything gets worse.</p></div>';
+$('tr2').innerHTML=h}}
+function prep(){var q=["Which medicine is right for me, and what side effects should I watch for?","How long until I should notice a change?","Are any supplements, herbs or diet changes safe with my medicine?","Which therapy or family programs are available near me?","What should we do if symptoms suddenly get worse?"];Object.keys(saved).forEach(function(i){q.push('Is '+T[i][0].toLowerCase()+' useful and safe for me?')});sheet('<h2>Questions for my doctor</h2><p>Tick them off as you ask.</p>'+q.map(function(x){return '<label class="li"><input type="checkbox"><span>'+x+'</span></label>'}).join('')+OK)}
+function safe(){var d={};try{d=JSON.parse(localStorage.getItem('sf')||'{}')}catch(e){}var f=[['me',"Trusted person's name"],['mp','Their phone'],['dp','Doctor or clinic phone'],['ep','Local emergency number'],['ws','My early warning signs'],['wh','What helps me feel better']];
+sheet('<h2>My safety card</h2><p>Add who to call, your early warning signs and what helps you. It stays on this device.</p>'+f.map(function(x){return '<label>'+x[1]+'<input class="inp" id="f_'+x[0]+'"></label>'}).join('')+'<div id="lk"></div><div class="btns"><button class="p" id="sf">Save</button></div>');
+function view(){$('lk').innerHTML=[['mp','Call trusted person'],['dp','Call doctor or clinic'],['ep','Call emergency number']].filter(function(x){return d[x[0]]}).map(function(x){return '<a class="act" href="tel:'+String(d[x[0]]).replace(/[^\d+]/g,'')+'"><span style="font-size:1.4rem">📞</span><div><b>'+x[1]+'</b></div></a>'}).join('')}
+f.forEach(function(x){$('f_'+x[0]).value=d[x[0]]||''});view();
+$('sf').onclick=function(){f.forEach(function(x){d[x[0]]=$('f_'+x[0]).value.slice(0,120)});try{localStorage.setItem('sf',JSON.stringify(d))}catch(e){}view()}}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-c],[data-k],[data-x],[data-m],[data-z],.my');if(!b)return;var d=b.dataset;
+if(d.c!==undefined){var t=C[+d.c];sheet(ico(t[3],t[2])+'<h2>'+t[0]+'</h2><span class="badge" style="background:rgba(47,179,168,.18);color:var(--teal)">Core care</span><p style="margin-top:12px">'+t[1]+'</p><p style="color:var(--mu);font-size:.85rem">General information. Your psychiatrist decides what is right for you.</p>'+OK)}
+else if(d.k!==undefined){var g=G[+d.k];sheet(ico(g[3],g[1])+'<h2>'+g[0]+'</h2><p>'+g[2]+'</p>'+OK)}
+else if(d.x){({prep:prep,safe:safe,calm:calm,help:helpG,triage:triage})[d.x]()}
+else if(d.m!==undefined||d.z!==undefined){var k=dk(0);ML[k]=ML[k]||{};if(d.m!==undefined)ML[k].m=+d.m;else ML[k].z=+d.z;try{localStorage.setItem('ml',JSON.stringify(ML))}catch(x){}mood()}
+else if(b.classList.contains('my'))flip(b)});
+$('today').appendChild($('hp'));$('today').appendChild($('mc'));mood();myths();
+var th='light';try{th=localStorage.getItem('th')||'light'}catch(e){}
+function setTh(t){th=t;document.documentElement.setAttribute('data-theme',t);$('thm').textContent=t==='dark'?'☀️ Light':'🌙 Dark';try{localStorage.setItem('th',t)}catch(e){}}
+$('thm').onclick=function(){setTh(th==='dark'?'light':'dark')};setTh(th);
+var hr=new Date().getHours();$('gr').textContent=hr<12?'Good morning':hr<18?'Good afternoon':'Good evening';
+var TP=['Regular sleep and wake times help many people feel steadier.','Taking medicine as prescribed matters. If side effects bother you, tell your doctor instead of stopping.','A hard day is not a failure. Recovery is not a straight line.','Talking to someone you trust can make heavy thoughts feel lighter.','A short walk in daylight and regular meals support both body and mind.','If you care for someone, rest is part of caring. You matter too.','Alcohol and drugs can make symptoms worse. Ask your doctor for honest advice.'];
+$('tip').textContent=TP[Math.floor(Date.now()/864e5)%TP.length];
+var tabs=[["home","Home","M3 11l9-8 9 8M5 10v10h14V10"],["signs","Signs","M12 3a6 6 0 00-6 6c0 2 1 3 2 4v3h8v-3c1-1 2-2 2-4a6 6 0 00-6-6zM9 20h6"],["care","Approaches","M12 21c-5-3-8-6-8-10a4.5 4.5 0 018-3 4.5 4.5 0 018 3c0 4-3 7-8 10z"],["today","Today","M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"],["help","Support","M4 5h16v11H9l-5 4z"],["myths","Myths","M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"]];
+$('nav').innerHTML=tabs.map(function(t){return '<button data-go="'+t[0]+'" aria-label="'+t[1]+'"><svg viewBox="0 0 24 24"><path d="'+t[2]+'"/></svg>'+t[1]+'</button>'}).join('');
+function go(k){closeSheet();window.scrollTo(0,0);document.querySelectorAll('.scr').forEach(function(s){s.classList.toggle('on',s.id===k);if(s.id===k)s.scrollTop=0});document.querySelectorAll('#nav button').forEach(function(b){b.classList.toggle('on',b.dataset.go===k)})}
+go('home');
+</script></body></html>
