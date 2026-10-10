@@ -2,7 +2,7 @@ Live Link : https://loquacious-fudge-c94405.netlify.app/
 
 Schizophrenia is one of the most misunderstood conditions in the world. Many people and families never find clear, kind, trustworthy information, especially in Bangladesh.
 
-That was my idea: a simple app anyone can open on their phone and actually get help from. I planned it, chose the content and shaped the design. I built it with Claude, Anthropic's AI assistant.
+That was my idea: a simple app anyone can open on their phone and actually get help from. I planned it, chose the content and shaped the design. 
 
 Meet Mindscape 🌅 Here is everything inside, and how it helps:
 
@@ -24,6 +24,4 @@ It also has light and dark mode, soft sunrise colours, no sign-up, and no data c
 Why it matters: stigma keeps people from asking for help, and families often do not know what to do. If this helps even one person understand the signs sooner, or feel less alone, it was worth building.
 
 Important: Mindscape is for education only. It is not medical advice and not a replacement for a doctor. I am now looking for psychiatrists and psychologists to review the content, so if that is you, I would love your feedback.
-Code: [paste your GitHub link]
 
-#MentalHealth #Schizophrenia #Bangladesh #HealthTech #BuildInPublic #Claude #Stigma
